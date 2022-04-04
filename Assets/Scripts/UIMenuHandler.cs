@@ -32,6 +32,11 @@ public class UIMenuHandler : MonoBehaviour
     public void StartNew()
     {
         GameManager.CurrentPlayer = PlayerName;
+        SceneManager.LoadScene(2);
+    }
+
+    public void OpenHighScores()
+    {
         SceneManager.LoadScene(1);
     }
 

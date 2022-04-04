@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public static List<Highscore> AllScores;
     public static string CurrentPlayer;
 
+    private static string PathSaveFile;
+
     private void Awake()
     {
         if (Instance != null)
@@ -22,6 +24,7 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        PathSaveFile = $"{Application.persistentDataPath}/savefile.json";
         AllScores = new List<Highscore>();
         LoadScores();
     }
@@ -44,15 +47,18 @@ public class GameManager : MonoBehaviour
         SaveData data = new SaveData();
         data.AllScores = AllScores;
         string json = JsonUtility.ToJson(data);
-        File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
+        if (File.Exists(PathSaveFile))
+        {
+            File.Delete(PathSaveFile);
+        }
+        File.WriteAllText(PathSaveFile, json);
     }
 
     private static void LoadScores()
     {
-        string path = Application.persistentDataPath + "/savefile.json";
-        if (File.Exists(path))
+        if (File.Exists(PathSaveFile))
         {
-            string json = File.ReadAllText(path);
+            string json = File.ReadAllText(PathSaveFile);
             SaveData data = JsonUtility.FromJson<SaveData>(json);
             AllScores.AddRange(data.AllScores);
         }

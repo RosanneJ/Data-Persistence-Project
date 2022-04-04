@@ -4,8 +4,8 @@ using System.Collections;
 [System.Serializable]
 public class Highscore
 {
-    private int Score;
-    private string Name;
+    [SerializeField] private int Score;
+    [SerializeField] private string Name;
 
     public Highscore(string Name, int Score)
     {
