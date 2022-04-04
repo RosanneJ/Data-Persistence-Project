@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public Highscore highscore;
+    public static List<Highscore> AllScores;
+    public static string CurrentPlayer;
 
     private void Awake()
     {
@@ -18,30 +22,39 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        AllScores = new List<Highscore>();
+        LoadScores();
     }
 
     [System.Serializable]
     class SaveData
     {
-        public Highscore highscore;
+        public List<Highscore> AllScores;
     }
 
-    public void SaveHighscore()
+    public static void UpdateScores(int points)
+    {
+        AllScores.Add(new Highscore(CurrentPlayer, points));
+        AllScores.Sort((y, x) => x.GetScore().CompareTo(y.GetScore()));
+        SaveScores();
+    }
+
+    private static void SaveScores()
     {
         SaveData data = new SaveData();
-        data.highscore = highscore;
+        data.AllScores = AllScores;
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
     }
 
-    public void LoadHighscore()
+    private static void LoadScores()
     {
         string path = Application.persistentDataPath + "/savefile.json";
-        if(File.Exists(path))
+        if (File.Exists(path))
         {
             string json = File.ReadAllText(path);
             SaveData data = JsonUtility.FromJson<SaveData>(json);
-            highscore = data.highscore;
+            AllScores.AddRange(data.AllScores);
         }
     }
 }
