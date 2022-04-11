@@ -13,9 +13,12 @@ public class MainManager : MonoBehaviour
     public Text ScoreText;
     public GameObject GameOverText;
     public Text BestScoreText;
+    public GameObject PauseMenu;
     
     private bool m_Started = false;
     private int m_Points;
+
+    private bool m_Paused = false;
     
     private bool m_GameOver = false;
 
@@ -61,6 +64,30 @@ public class MainManager : MonoBehaviour
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
+        }
+
+        if (!m_Paused && !m_GameOver)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                PauseMenu.SetActive(true);
+                m_Paused = true;
+            }
+        } else
+        {
+            HandlePausedActions();
+        }
+        
+    }
+
+    private void HandlePausedActions()
+    {
+        Time.timeScale = 0;
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseMenu.SetActive(false);
+            m_Paused = false;
+            Time.timeScale = 1;
         }
     }
 
