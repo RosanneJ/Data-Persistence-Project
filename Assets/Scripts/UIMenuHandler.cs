@@ -13,10 +13,33 @@ public class UIMenuHandler : MonoBehaviour
     private string PlayerName;
     public GameObject StartButton;
     public GameObject EnterNameField;
+    public GameObject PlayerControlField;
 
     public void Start()
     {
         StartButton.GetComponent<Button>().interactable = !string.IsNullOrEmpty(PlayerName);
+        PlayerControlField.GetComponent<Dropdown>().value = GameManager.ControlInput == "Keys" ? 0 : 1;
+        PlayerControlField.GetComponent<Dropdown>().onValueChanged.AddListener(
+            delegate
+        {
+            DropdownValueChanged(PlayerControlField.GetComponent<Dropdown>());
+        });
+    }
+
+    private void DropdownValueChanged(Dropdown change)
+    {
+        switch(change.value)
+        {
+            case 0:
+                GameManager.ControlInput = "Keys";
+                break;
+            case 1:
+                GameManager.ControlInput = "Mouse";
+                break;
+            default:
+                break;
+        }
+        GameManager.UpdateSettings();
     }
 
     public void OnPlayerNameEdited()

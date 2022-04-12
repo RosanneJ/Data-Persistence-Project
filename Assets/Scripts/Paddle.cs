@@ -4,19 +4,31 @@ using UnityEngine;
 
 public class Paddle : MonoBehaviour
 {
-    public float Speed = 2.0f;
+    private float Speed;
     public float MaxMovement = 2.0f;
+
+    private string InputAxis;
     
-    // Start is called before the first frame update
     void Start()
     {
-        
+      switch(GameManager.ControlInput)
+        {
+            case "Keys":
+                InputAxis = "Horizontal";
+                Speed = 2.0f;
+                break;
+            case "Mouse":
+                InputAxis = "Mouse X";
+                Speed = 100.0f;
+                break;
+            default:
+                break;
+        }
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        float input = Input.GetAxis("Horizontal");
+        float input = Input.GetAxis(InputAxis);
 
         Vector3 pos = transform.position;
         pos.x += input * Speed * Time.deltaTime;

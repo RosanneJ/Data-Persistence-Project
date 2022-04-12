@@ -219,7 +219,7 @@ Transform:
   m_Children:
   - {fileID: 177912861}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &97436046
 Rigidbody:
@@ -249,7 +249,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1c141baad4ddf14a98c290342342cf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 4
   MaxMovement: 2
 --- !u!1 &177912857
 GameObject:
@@ -618,7 +617,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &450625942
 MonoBehaviour:
@@ -1408,7 +1407,7 @@ Transform:
   - {fileID: 1288645156}
   - {fileID: 1634186525}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1568428685
 GameObject:
@@ -1772,7 +1771,7 @@ RectTransform:
   - {fileID: 474497239}
   - {fileID: 2078529055}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

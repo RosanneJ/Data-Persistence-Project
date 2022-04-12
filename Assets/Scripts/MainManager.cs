@@ -41,13 +41,14 @@ public class MainManager : MonoBehaviour
             }
         }
         UpdateHighScoreText();
+
     }
 
     private void Update()
     {
         if (!m_Started)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (GameManager.ControlInput == "Keys" && Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonUp(0))
             {
                 m_Started = true;
                 float randomDirection = Random.Range(-1.0f, 1.0f);
@@ -60,7 +61,7 @@ public class MainManager : MonoBehaviour
         }
         else if (m_GameOver)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (GameManager.ControlInput == "Keys"&& Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonUp(0))
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
